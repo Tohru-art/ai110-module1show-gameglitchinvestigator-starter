@@ -38,13 +38,14 @@ For the hints bug I ran `pytest tests/test_game_logic.py -v` and checked that `t
 
 ## 4. What did you learn about Streamlit and state?
 
-- How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+Every time a user clicks a button or types anything, Streamlit reruns the entire script from top to bottom. That means any regular variable gets reset to its starting value on every interaction. `st.session_state` is how you keep values alive across those reruns — it acts like a small dictionary that persists between runs. The New Game bug was a good example of this: forgetting to reset `st.session_state.status` meant the game stayed frozen on "won" or "lost" even after clicking New Game, because the status check ran before the game could accept new input.
 
 ---
 
 ## 5. Looking ahead: your developer habits
 
-- What is one habit or strategy from this project that you want to reuse in future labs or projects?
-  - This could be a testing habit, a prompting strategy, or a way you used Git.
-- What is one thing you would do differently next time you work with AI on a coding task?
-- In one or two sentences, describe how this project changed the way you think about AI generated code.
+One habit I want to keep is writing tests for logic functions before trusting that a fix works. Running pytest gave me confidence the hints and comparison bugs were actually fixed, not just appearing fixed in one manual test case.
+
+Next time I work with AI on code I would read the AI's output more carefully before accepting it — the starter test file had a type mismatch that would have silently broken all three tests, and I only caught it by checking the function signature myself.
+
+AI-generated code can look correct at a glance but still have subtle logic errors. This project showed me that AI is useful for spotting patterns and suggesting structure, but you still need to read and verify every change it makes.

@@ -25,9 +25,20 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+**Purpose:** A number guessing game where the player picks a difficulty, then tries to guess a secret number within a limited number of attempts. Hints guide the player higher or lower after each guess.
+
+**Bugs found:**
+- Hints were backwards — "Go HIGHER!" showed when the guess was too high
+- The secret was converted to a string on every even attempt, breaking the comparison
+- Hard difficulty used range 1–50, which is smaller (easier) than Normal's 1–100
+- The New Game button did not reset `status`, `score`, or `history`, leaving the game frozen after a win or loss
+
+**Fixes applied:**
+- Swapped the hint messages in `check_guess` in `logic_utils.py`
+- Removed the string conversion — always compare using the integer secret
+- Changed Hard range to 1–1000
+- Reset all session state fields (`status`, `score`, `history`, `attempts`, `secret`) in the New Game block
+- Refactored all game logic into `logic_utils.py` and added 16 pytest tests
 
 ## 📸 Demo
 
